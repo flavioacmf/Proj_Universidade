@@ -17,5 +17,9 @@
     "mongoose": "^8.7.2",
     "mysql2": "^3.11.3",
     "sequelize": "^6.37.4"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0"
   }
 }

@@ -10,7 +10,7 @@ function ConsultaProfessores() {
   useEffect(() => {
     const fetchProfessores = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/professores'); // Altere a URL para o endpoint correto
+        const response = await axios.get('http://localhost:5000/api/vwprofessores'); // Altere a URL para o endpoint correto
         setProfessores(response.data);
       } catch (err) {
         setError('Erro ao carregar os professores');

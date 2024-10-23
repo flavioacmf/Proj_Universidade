@@ -10,7 +10,7 @@ function ConsultaSalas() {
   useEffect(() => {
     const fetchSalas = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/backend/models/vwSalas'); // Altere a URL para a sua view
+        const response = await axios.get('http://localhost:5000/api/vwSalas'); // Altere a URL para a sua view
         setSalas(response.data);
       } catch (err) {
         setError('Erro ao carregar as salas');

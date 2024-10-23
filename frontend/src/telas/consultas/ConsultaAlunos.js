@@ -10,7 +10,7 @@ function ConsultaAlunos() {
   useEffect(() => {
     const fetchAlunos = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/alunos'); // Alterar para a rota correta
+        const response = await axios.get('http://localhost:5000/api/vwalunos'); // Alterar para a rota correta
         setAlunos(response.data);
       } catch (err) {
         setError('Erro ao carregar os alunos');

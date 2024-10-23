@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../Db');
 
-const VwProfessores = sequelize.define('vw_Professores', {
+const VwProfessores = sequelize.define('VwProfessores', {
   idProfessor: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -28,7 +28,7 @@ const VwProfessores = sequelize.define('vw_Professores', {
     allowNull: true
   }
 }, {
-  tableName: 'vw_Professores',
+  tableName: 'VwProfessores',
   timestamps: false
 });
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../../visualPage/CadastroSalas.css'; // Arquivo CSS para o layout
@@ -10,7 +10,7 @@ const CadastroSalas = () => {
   const [idSala, setIdSala] = useState(null);  // Adicionando o campo ID
   const [nome, setNome] = useState('');
   const [capacidade, setCapacidade] = useState('');
-  const [editingSala, setEditingSala] = useState(null);
+  const [editingSala, setEditingSala] = useState(false);
 
   // Estados para controlar habilitação de botões
   const [canCreate, setCanCreate] = useState(true);
@@ -111,7 +111,7 @@ const CadastroSalas = () => {
 
         <div className="buttons">
           <button onClick={handleCreateNewSala} disabled={!canCreate}>Novo</button>
-          <button onClick={handleEditSala} disabled={!canEdit}>Salvar</button>
+          <button onClick={handleEditSala} disabled={!canEdit}>Editar</button>
           <button onClick={handleDeleteSala} disabled={!canDelete}>Excluir</button>
           <button onClick={handleConsultSalas} disabled={!canConsult}>Consultar</button>
         </div>

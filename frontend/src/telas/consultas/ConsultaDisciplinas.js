@@ -10,7 +10,7 @@ function ConsultaDisciplinas() {
   useEffect(() => {
     const fetchDisciplinas = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/disciplinas'); // Alterar para a rota correta
+        const response = await axios.get('http://localhost:5000/api/vwdisciplinas'); // Alterar para a rota correta
         setDisciplinas(response.data);
       } catch (err) {
         setError('Erro ao carregar as disciplinas');
