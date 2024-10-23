@@ -1,49 +1,50 @@
-const ProfessorModel = require('../models/ProfessorModel');
-const VwProfessores = require('../models/VwProfessores'); // Importa o modelo da view de Professores
+const Disciplina = require('../models/DisciplinaModel'); // Importa o modelo de Disciplina
+const VwDisciplinas = require('../models/VwDisciplinas'); // Importa o modelo da view de Disciplinas
 
-// Obter todos os professores (agora usando a view)
-const getAllProfessores = async (req, res) => {
+// Criar uma nova disciplina
+exports.create = async (req, res) => {
   try {
-    const professores = await VwProfessores.findAll(); // Buscar os professores da view
-    res.status(200).json(professores);
+    const disciplina = await Disciplina.create(req.body);
+    res.status(201).json(disciplina);
   } catch (error) {
-    res.status(500).json({ error: 'Erro ao buscar os professores' });
+    res.status(500).json({ error: 'Erro ao criar disciplina' });
   }
 };
 
-// Criar um novo professor
-const createProfessor = async (req, res) => {
+// Obter todas as disciplinas
+exports.getAll = async (req, res) => {
   try {
-    const professorId = await ProfessorModel.createProfessor(req.body);
-    res.status(201).json({ id: professorId });
+    const disciplinas = await VwDisciplinas.findAll(); // Buscar as disciplinas da view
+    res.status(200).json(disciplinas);
   } catch (error) {
-    res.status(500).json({ error: 'Erro ao criar o professor' });
+    res.status(500).json({ error: 'Erro ao obter disciplinas' });
   }
 };
 
-// Atualizar um professor
-const updateProfessor = async (req, res) => {
+// Atualizar uma disciplina
+exports.update = async (req, res) => {
   try {
-    await ProfessorModel.updateProfessor(req.params.id, req.body);
-    res.status(200).json({ message: 'Professor atualizado com sucesso' });
+    const disciplina = await Disciplina.findByPk(req.params.id);
+    if (!disciplina) {
+      return res.status(404).json({ error: 'Disciplina não encontrada' });
+    }
+    await disciplina.update(req.body);
+    res.status(200).json(disciplina);
   } catch (error) {
-    res.status(500).json({ error: 'Erro ao atualizar o professor' });
+    res.status(500).json({ error: 'Erro ao atualizar disciplina' });
   }
 };
 
-// Excluir um professor
-const deleteProfessor = async (req, res) => {
+// Excluir uma disciplina
+exports.delete = async (req, res) => {
   try {
-    await ProfessorModel.deleteProfessor(req.params.id);
-    res.status(200).json({ message: 'Professor excluído com sucesso' });
+    const disciplina = await Disciplina.findByPk(req.params.id);
+    if (!disciplina) {
+      return res.status(404).json({ error: 'Disciplina não encontrada' });
+    }
+    await disciplina.destroy();
+    res.status(200).json({ message: 'Disciplina excluída com sucesso' });
   } catch (error) {
-    res.status(500).json({ error: 'Erro ao excluir o professor' });
+    res.status(500).json({ error: 'Erro ao excluir disciplina' });
   }
-};
-
-module.exports = {
-  getAllProfessores,
-  createProfessor,
-  updateProfessor,
-  deleteProfessor
 };

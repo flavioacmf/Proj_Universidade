@@ -10,7 +10,10 @@ router.post('/', DisciplinaController.create);
 router.get('/', DisciplinaController.getAll);
 
 // Rota para obter disciplinas através da view vw_Disciplinas
-router.get('/view', VwDisciplinasController.getAllFromView); // Nova rota para a view
+router.get('/view', VwDisciplinasController.listarTodos); // Atualizado para 'listarTodos'
+
+// Rota para buscar disciplina por ID na view vw_Disciplinas
+router.get('/view/:id', VwDisciplinasController.buscarPorId); // Adicionei rota para buscar por ID
 
 // Rota para editar uma disciplina existente
 router.put('/:id', DisciplinaController.update);

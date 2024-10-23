@@ -136,7 +136,7 @@ const CadastroAlunos = () => {
 
         <div className="buttons">
           <button onClick={handleCreateNewAluno} disabled={!canCreate}>Novo</button>
-          <button onClick={handleEditAluno} disabled={!canEdit}>Salvar</button>
+          <button onClick={handleEditAluno} disabled={!canEdit}>Editar</button>
           <button onClick={handleDeleteAluno} disabled={!canDelete}>Excluir</button>
           <button onClick={handleConsultAlunos} disabled={!canConsult}>Consultar</button>
         </div>

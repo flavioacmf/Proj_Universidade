@@ -1,6 +1,6 @@
 // models/Aluno.js
 const { DataTypes } = require('sequelize');
-const sequelize = require('./db'); // Corrigido o caminho para o arquivo de configuração do Sequelize
+const sequelize = require('../Db'); // Corrigido o caminho para o arquivo de configuração do Sequelize
 
 // Definição do modelo Aluno com Sequelize
 const Aluno = sequelize.define('Aluno', {

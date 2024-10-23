@@ -1,85 +1,49 @@
-const db = require('./db'); // Corrigido o caminho para o arquivo de configuração do banco de dados
+const Professor = require('../models/ProfessorModel'); // Importa o modelo de Professor
 
-// Função para obter todos os professores
-const getProfessores = () => {
-  return new Promise((resolve, reject) => {
-    db.query('SELECT * FROM professores', (error, results) => {
-      if (error) {
-        console.error(error); // Log do erro para facilitar a depuração
-        return reject(error);
-      }
-      return resolve(results);
-    });
-  });
-};
-
-// Função para adicionar um novo professor
-const createProfessor = (professor) => {
-  const { nome, email, dataCadastro } = professor;
-  return new Promise((resolve, reject) => {
-    db.query(
-      'INSERT INTO professores (nome, email, dataCadastro) VALUES (?, ?, ?)',
-      [nome, email, dataCadastro],
-      (error, results) => {
-        if (error) {
-          console.error(error); // Log do erro para facilitar a depuração
-          return reject(error);
-        }
-        return resolve(results.insertId);
-      }
-    );
-  });
-};
-
-// Função para atualizar um professor
-const updateProfessor = (id, professor) => {
-  const { nome, email, dataCadastro } = professor;
-  return new Promise((resolve, reject) => {
-    db.query(
-      'UPDATE professores SET nome = ?, email = ?, dataCadastro = ? WHERE id = ?',
-      [nome, email, dataCadastro, id],
-      (error, results) => {
-        if (error) {
-          console.error(error); // Log do erro para facilitar a depuração
-          return reject(error);
-        }
-        return resolve(results);
-      }
-    );
-  });
-};
-
-// Função para excluir um professor
-const deleteProfessor = async (id) => {
-  // Verifica se o professor existe antes de tentar deletá-lo
-  const [professor] = await new Promise((resolve, reject) => {
-    db.query('SELECT * FROM professores WHERE id = ?', [id], (error, results) => {
-      if (error) {
-        console.error(error); // Log do erro para facilitar a depuração
-        return reject(error);
-      }
-      return resolve(results);
-    });
-  });
-
-  if (!professor) {
-    throw new Error('Professor não encontrado'); // Retorna erro se o professor não existe
+// Criar um novo professor
+exports.createProfessor = async (req, res) => {
+  try {
+    const professor = await Professor.create(req.body);
+    res.status(201).json(professor);
+  } catch (error) {
+    res.status(500).json({ error: 'Erro ao criar professor' });
   }
-
-  return new Promise((resolve, reject) => {
-    db.query('DELETE FROM professores WHERE id = ?', [id], (error, results) => {
-      if (error) {
-        console.error(error); // Log do erro para facilitar a depuração
-        return reject(error);
-      }
-      return resolve(results);
-    });
-  });
 };
 
-module.exports = {
-  getProfessores,
-  createProfessor,
-  updateProfessor,
-  deleteProfessor
+// Obter todos os professores
+exports.getAllProfessores = async (req, res) => {
+  try {
+    const professores = await Professor.findAll(); // Buscar todos os professores
+    res.status(200).json(professores);
+  } catch (error) {
+    res.status(500).json({ error: 'Erro ao obter professores' });
+  }
+};
+
+// Atualizar um professor
+exports.updateProfessor = async (req, res) => {
+  try {
+    const professor = await Professor.findByPk(req.params.id);
+    if (!professor) {
+      return res.status(404).json({ error: 'Professor não encontrado' });
+    }
+    await professor.update(req.body);
+    res.status(200).json(professor);
+  } catch (error) {
+    res.status(500).json({ error: 'Erro ao atualizar professor' });
+  }
+};
+
+// Excluir um professor
+exports.deleteProfessor = async (req, res) => {
+  try {
+    const professor = await Professor.findByPk(req.params.id);
+    if (!professor) {
+      return res.status(404).json({ error: 'Professor não encontrado' });
+    }
+    await professor.destroy();
+    res.status(200).json({ message: 'Professor excluído com sucesso' });
+  } catch (error) {
+    res.status(500).json({ error: 'Erro ao excluir professor' });
+  }
 };

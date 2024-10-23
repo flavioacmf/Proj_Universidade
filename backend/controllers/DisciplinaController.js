@@ -1,4 +1,4 @@
-const Disciplina = require('../models/Disciplina'); // Importa o modelo de Disciplina
+const Disciplina = require('../models/DisciplinaModel'); // Importa o modelo de Disciplina
 const VwDisciplinas = require('../models/VwDisciplinas'); // Importa o modelo da view de Disciplinas
 
 // Criar uma nova disciplina

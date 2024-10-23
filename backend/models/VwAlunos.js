@@ -1,7 +1,8 @@
+// models/VwAlunos.js
 const { DataTypes } = require('sequelize');
-const sequelize = require('../db'); // Ajuste o caminho conforme necessário
+const sequelize = require('../Db'); // Ajuste o caminho para o arquivo de conexão com o banco de dados
 
-const VwAlunos = sequelize.define('vw_Alunos', {
+const VwAlunos = sequelize.define('VwAlunos', {  // Ajustado para "VwAlunos" sem sublinhado
   idAluno: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -28,8 +29,13 @@ const VwAlunos = sequelize.define('vw_Alunos', {
     allowNull: true
   }
 }, {
-  tableName: 'vw_Alunos', // Nome da view
+  tableName: 'vw_Alunos', // Nome da view no banco de dados
   timestamps: false // Desabilita os timestamps automáticos
 });
+
+// Método para pegar todos os registros da view
+VwAlunos.getAllFromView = async () => {
+  return await VwAlunos.findAll();  // Sequelize faz a consulta à view
+};
 
 module.exports = VwAlunos;

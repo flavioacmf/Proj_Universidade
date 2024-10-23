@@ -1,5 +1,5 @@
 // controllers/AlunoController.js
-const Aluno = require('../models/Aluno');
+const Aluno = require('../models/AlunoModel');
 const VwAlunos = require('../models/VwAlunos'); // Importa o modelo da view de Alunos
 
 // Função para criar um novo aluno

@@ -1,17 +1,17 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../db');
+const sequelize = require('../Db');
 
-const VwSalas = sequelize.define('vw_Salas', {
-  idSala: {
+const VwDisciplinas = sequelize.define('vw_Disciplinas', {
+  idDisciplina: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     allowNull: false
   },
-  numero: {
+  nome: {
     type: DataTypes.STRING,
     allowNull: false
   },
-  capacidade: {
+  cargaHoraria: {
     type: DataTypes.INTEGER,
     allowNull: false
   },
@@ -20,8 +20,8 @@ const VwSalas = sequelize.define('vw_Salas', {
     allowNull: true
   }
 }, {
-  tableName: 'vw_Salas',
+  tableName: 'vw_Disciplinas',
   timestamps: false
 });
 
-module.exports = VwSalas;
+module.exports = VwDisciplinas;

@@ -1,21 +1,54 @@
+// alunoRoutes.js
 const express = require('express');
 const router = express.Router();
-const alunoController = require('../controllers/alunoController');  // Corrigido o caminho para o controller de alunos
-const VwAlunosController = require('../controllers/VwAlunosController');  // Controller da view vw_Alunos
+const db = require('../Db'); // Conexão ao banco de dados (arquivo `db.js` separado para a conexão)
 
-// Rota para criar aluno
-router.post('/', alunoController.createAluno);
+// Criar novo aluno
+router.post('/alunos', (req, res) => {
+  const { nome, email, dataCadastro, cpfCNPJ, inativo } = req.body;
+  const query = 'INSERT INTO alunos (nome, email, dataCadastro, cpfCNPJ, inativo) VALUES (?, ?, ?, ?, ?)';
+  db.query(query, [nome, email, dataCadastro, cpfCNPJ, inativo], (err, results) => {
+    if (err) {
+      return res.status(500).send(err);
+    }
+    res.status(201).send({ message: 'Aluno cadastrado com sucesso!', alunoId: results.insertId });
+  });
+});
 
-// Rota para consultar todos os alunos (tabela Alunos)
-router.get('/', alunoController.getAllAlunos);
+// Editar aluno
+router.put('/alunos/:id', (req, res) => {
+  const { nome, email, dataCadastro, cpfCNPJ, inativo } = req.body;
+  const { id } = req.params;
+  const query = 'UPDATE alunos SET nome = ?, email = ?, dataCadastro = ?, cpfCNPJ = ?, inativo = ? WHERE id = ?';
+  db.query(query, [nome, email, dataCadastro, cpfCNPJ, inativo, id], (err) => {
+    if (err) {
+      return res.status(500).send(err);
+    }
+    res.send({ message: 'Aluno atualizado com sucesso!' });
+  });
+});
 
-// Rota para consultar alunos através da view vw_Alunos
-router.get('/view', VwAlunosController.getAllFromView); // Nova rota para a view
+// Excluir aluno
+router.delete('/alunos/:id', (req, res) => {
+  const { id } = req.params;
+  const query = 'DELETE FROM alunos WHERE id = ?';
+  db.query(query, [id], (err) => {
+    if (err) {
+      return res.status(500).send(err);
+    }
+    res.send({ message: 'Aluno excluído com sucesso!' });
+  });
+});
 
-// Rota para editar um aluno
-router.put('/:id', alunoController.updateAluno);
-
-// Rota para excluir um aluno
-router.delete('/:id', alunoController.deleteAluno);
+// Consultar todos os alunos
+router.get('/alunos', (req, res) => {
+  const query = 'SELECT * FROM alunos';
+  db.query(query, (err, results) => {
+    if (err) {
+      return res.status(500).send(err);
+    }
+    res.send(results);
+  });
+});
 
 module.exports = router;
