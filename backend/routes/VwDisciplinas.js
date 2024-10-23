@@ -1,7 +1,7 @@
 // routes/VwDisciplinas.js
 const express = require('express');
 const router = express.Router();
-const VwDisciplinasController = require('../controllers/VwDisciplinas');
+const VwDisciplinasController = require('../controllers/VwDisciplinasController');
 
 // Rota para listar todas as disciplinas
 router.get('/', VwDisciplinasController.listarTodos);

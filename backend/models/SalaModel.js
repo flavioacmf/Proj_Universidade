@@ -1,5 +1,4 @@
-// models/Sala.js
-const db = require('../Db');  // Corrigido o caminho para o arquivo de configuração do MySQL
+const db = require('../Db');  // Importa a conexão com o banco de dados MySQL
 
 const Sala = {
   // Função para buscar todas as salas

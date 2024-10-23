@@ -1,7 +1,7 @@
-const VwProfessores = require('../models/VwProfessores'); // Importa o modelo da view de Professores
+const VwProfessores = require('../models/VwProfessores');
 
 const VwProfessoresController = {
-    // Método para listar todos os professores da view
+    // Função para listar todos os professores da view
     async getAllFromView(req, res) {
         try {
             const professores = await VwProfessores.findAll();
@@ -11,7 +11,7 @@ const VwProfessoresController = {
         }
     },
 
-    // Método para buscar professor por ID na view
+    // Função para buscar professor por ID na view
     async buscarPorId(req, res) {
         try {
             const { id } = req.params;

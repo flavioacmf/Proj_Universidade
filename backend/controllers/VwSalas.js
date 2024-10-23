@@ -1,7 +1,7 @@
-// controllers/VwSalas.js
 const VwSalas = require('../models/VwSalas');
 
 const VwSalasController = {
+    // Função para listar todas as salas da view
     async listarTodos(req, res) {
         try {
             const salas = await VwSalas.findAll();
@@ -11,6 +11,7 @@ const VwSalasController = {
         }
     },
 
+    // Função para buscar sala por ID na view
     async buscarPorId(req, res) {
         try {
             const { id } = req.params;

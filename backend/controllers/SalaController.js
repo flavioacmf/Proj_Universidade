@@ -1,4 +1,3 @@
-// controllers/SalaController.js
 const Sala = require('../models/SalaModel');
 const VwSalas = require('../models/VwSalas'); // Importa o modelo da view de Salas
 

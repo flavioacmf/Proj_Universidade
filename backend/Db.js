@@ -2,7 +2,7 @@
 const { Sequelize } = require('sequelize');
 
 // Instanciar o Sequelize com o driver MySQL
-const sequelize = new Sequelize('BDFAC', 'root', 'admin', {
+const sequelize = new Sequelize('BDFAC', 'root', '', {
   host: 'localhost',
   dialect: 'mysql', // Especifica que você está usando o MySQL
 });

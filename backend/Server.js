@@ -12,7 +12,7 @@ const vwAlunosRoutes = require('./routes/VwAlunos');
 const vwDisciplinasRoutes = require('./routes/VwDisciplinas');
 const vwProfessoresRoutes = require('./routes/VwProfessores');
 const vwSalasRoutes = require('./routes/VwSalas');
-const vwTurmasRoutes = require('./routes/VwTurmas');
+//const vwTurmasRoutes = require('./routes/VwTurmas');
 
 const app = express();
 
@@ -31,7 +31,7 @@ app.use('/api/vwalunos', vwAlunosRoutes);
 app.use('/api/vwdisciplinas', vwDisciplinasRoutes);
 app.use('/api/vwprofessores', vwProfessoresRoutes);
 app.use('/api/vwsalas', vwSalasRoutes);
-app.use('/api/vwturmas', vwTurmasRoutes);
+//app.use('/api/vwturmas', vwTurmasRoutes);
 
 // Porta do servidor
 const PORT = 5000;
