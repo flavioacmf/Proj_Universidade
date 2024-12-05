@@ -1,0 +1,27 @@
+{
+  "name": "sistemafaculdade",
+  "version": "1.0.0",
+  "description": "Backend do Sistema Faculdade",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "migrate": "sequelize db:migrate",
+    "seed": "sequelize db:seed:all"
+  },
+  "dependencies": {
+    "axios": "^1.7.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "mysql2": "^3.11.4",
+    "react-router-dom": "^6.28.0",
+    "sequelize": "^6.37.5",
+    "sistemafaculdade": "file:"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.6.2"
+  },
+  "author": "FlavioAmorim&SamuelAugustoo",
+  "license": "MIT"
+}
